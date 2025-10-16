@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setup() {g
+    private fun setup() {
         val buttons = arrayOf<Button>(
             findViewById(R.id.num0),
             findViewById(R.id.num1),
