@@ -161,10 +161,22 @@ class Calculator {
     }
 
     private fun reduceAdditionAndSubtraction(expression: String): String {
-        val expr = expression.replace("\\s+".toRegex(), "")
+        // Remove whitespace
+        var expr = expression.replace("\\s+".toRegex(), "")
+
+        // Replace double signs: "--" -> "+", "++" -> "+", "+-" -> "-", "-+" -> "-"
+        while (expr.contains("--") || expr.contains("++") || expr.contains("+-") || expr.contains("-+")) {
+            expr = expr.replace("--", "+")
+                .replace("++", "+")
+                .replace("+-", "-")
+                .replace("-+", "-")
+        }
+
+        // Match numbers with optional sign
         val regex = Regex("[+-]?(?:\\d+(?:\\.\\d+)?|\\.\\d+)")
         val sum = regex.findAll(expr).sumOf { it.value.toBigDecimal() }
         return sum.toString()
     }
+
 
 }
