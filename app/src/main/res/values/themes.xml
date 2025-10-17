@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Calculator" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorDigit</item>
+        <item name="colorPrimaryDark">@color/colorOperator</item>
     </style>
 
     <style name="Theme.Calculator" parent="Base.Theme.Calculator" />

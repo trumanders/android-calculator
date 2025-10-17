@@ -20,6 +20,7 @@ class ExpressionController() {
     private lateinit var _buttonInput: String
     private lateinit var _updatedExpression: String
     private var _existingLastChar: Char? = null
+
     @SuppressLint("SetTextI18n")
     fun updateExpressionView(tappedButton: Button, currentExpression: String): String {
         _updatedExpression = currentExpression

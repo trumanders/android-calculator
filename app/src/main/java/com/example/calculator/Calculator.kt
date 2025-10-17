@@ -5,12 +5,14 @@ import android.widget.TextView
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-private const val INTERNAL_CALCULATION_POINT = '.'
 private var internalStartPercentCount = 0
 private var internalEndPercentCount = 0
 
 class Calculator {
-    fun updateInstantResultView(currentExpression: String, currentInstantResult: String): String {
+    companion object {
+        const val INTERNAL_CALCULATION_POINT = '.'
+    }
+    fun updateInstantResultView(currentExpression: String): String {
         internalStartPercentCount = ExpressionController.startParenthesisCount
         internalEndPercentCount = ExpressionController.endParenthesisCount
         if (currentExpression.isEmpty()) {

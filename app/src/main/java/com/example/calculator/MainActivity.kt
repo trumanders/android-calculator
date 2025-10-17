@@ -1,17 +1,16 @@
 package com.example.calculator
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
-import android.view.View
+import androidx.core.view.WindowInsetsCompat
 import android.widget.TextView
 import android.widget.Button
-import androidx.core.view.WindowInsetsCompat
+import java.math.BigDecimal
+import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
-
-
+import java.util.Locale
 
 private lateinit var expressionFormatter: ExpressionController
 private lateinit var calculator: Calculator
@@ -19,6 +18,10 @@ private lateinit var calculator: Calculator
 class MainActivity : AppCompatActivity() {
     private val expressionTextView: TextView by lazy { findViewById<TextView>(R.id.expressionTextView)}
     private val instantResultTextView: TextView by lazy { findViewById<TextView>(R.id.textViewInstantResult)}
+    private var rawExpressionTextViewText = ""
+    private var rawInstantResult = ""
+
+    private val formatter = DecimalFormat.getInstance(Locale.getDefault()) as DecimalFormat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,20 +38,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun buttonTapped(tappedButton: Button) {
-        expressionTextView.text = expressionFormatter.updateExpressionView(tappedButton, expressionTextView.text.toString())
+        rawExpressionTextViewText = expressionFormatter.updateExpressionView(tappedButton, rawExpressionTextViewText)
+        rawInstantResult = calculator
+            .updateInstantResultView(rawExpressionTextViewText)
 
-        var instantResult = calculator
-            .updateInstantResultView(expressionTextView.text.toString(), instantResultTextView.text.toString())
-
-        if (!instantResult.isEmpty() && instantResult.toDouble() % 1.0 == 0.0) {
-            instantResult = instantResult.toBigDecimal().stripTrailingZeros().toPlainString()
+        if (rawInstantResult.isNotEmpty() && (rawInstantResult.toBigDecimal() % BigDecimal(1)).equals(0.0)) {
+            rawInstantResult = rawInstantResult.toBigDecimal().stripTrailingZeros().toPlainString()
         }
 
-        instantResultTextView.text = instantResult.replace('.', Symbols.POINT)
-
-        if (tappedButton.id == R.id.numSum) {
-            expressionTextView.text = instantResultTextView.text
+        if (tappedButton.id == R.id.numSum && rawInstantResult.isNotEmpty()) {
+            rawExpressionTextViewText = rawInstantResult
+            rawInstantResult = ""
         }
+
+        val formattedExpressionOutput = if (rawExpressionTextViewText.isNotEmpty())
+            Regex("\\d+").replace(rawExpressionTextViewText) { x -> formatter.format(BigDecimal(x.value)) }
+            else ""
+
+        val formattedInstantResultOutput = if (rawInstantResult.isNotEmpty())
+            formatter.format(BigDecimal(rawInstantResult))
+            else ""
+
+        expressionTextView.text = formattedExpressionOutput
+        instantResultTextView.text = formattedInstantResultOutput
     }
 
     private fun setup() {

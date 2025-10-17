@@ -2,6 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#AABBCCDD</color>
-    <color name="colorPrimaryDark">#66666666</color>
+    <color name="colorDigit">#3787de9e</color>
+    <color name="colorOperator">#3787d2de</color>
+    <color name="colorParentheses">#3787ded4</color>
+    <color name="colorSum">#376693ba</color>
+    <color name="colorClear">#37fa9198</color>
+    <color name="colorDelete">#37faa491</color>
 </resources>
