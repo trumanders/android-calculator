@@ -2,6 +2,8 @@ package com.example.calculator
 
 import android.nfc.FormatException
 import android.widget.TextView
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 private const val INTERNAL_CALCULATION_POINT = '.'
 private var internalStartPercentCount = 0
@@ -26,13 +28,6 @@ class Calculator {
                 break
             }
         }
-
-//        if (ExpressionFormatter.isOperator(internalExpression.last())) {
-//            internalExpression = internalExpression.dropLast(1)
-//            if (ExpressionFormatter.isOperator(internalExpression.last())) {    // Handle double operators: multiplied or divided by negative ("x-", "/-")
-//                internalExpression = internalExpression.dropLast(1)
-//            }
-//        }
 
         if (!internalExpression.isEmpty() && internalExpression.last() == Operators.START_PARENTHESES) {
             internalExpression = internalExpression.dropLast(1)
@@ -110,7 +105,7 @@ class Calculator {
         val regex = Regex("""(-?(?:\d+(?:\.\d+)?|\.\d+))%""")
         return regex.replace(expression) { m ->
             val numText = m.groupValues[1]
-            val replaced = (numText.toDouble() / 100.0).toString()
+            val replaced = (numText.toBigDecimal() / BigDecimal(100)).toString()
             replaced
         }
     }
@@ -151,16 +146,16 @@ class Calculator {
             indexBeforeLeftOperandStart + 1
 
         // calculate and replace
-        val leftOperand = expression.substring(leftOperandStartIndex, leftOperandEndIndex + 1).toDouble()
-        val rightOperand = expression.substring(rightOperandStartIndex, rightOperandEndIndex + 1).toDouble()
-        var calculatedValue: Double? = null
-
-        when (expression[operatorIndex]) {
-            Operators.MULTIPLY -> { calculatedValue = leftOperand * rightOperand }
-            Operators.DIVIDE -> { calculatedValue = (leftOperand / rightOperand) }
+        val leftOperand = expression.substring(leftOperandStartIndex, leftOperandEndIndex + 1).toBigDecimal()
+        val rightOperand = expression.substring(rightOperandStartIndex, rightOperandEndIndex + 1).toBigDecimal()
+        val calculatedValue: BigDecimal = when (expression[operatorIndex]) {
+            Operators.MULTIPLY -> leftOperand.multiply(rightOperand)
+            Operators.DIVIDE -> leftOperand.divide(rightOperand, 10, RoundingMode.HALF_UP)
+            else -> BigDecimal.ZERO
         }
 
-        val newExpression = expression.replaceRange(leftOperandStartIndex, rightOperandEndIndex + 1, calculatedValue.toString())
+        val newExpression = expression
+            .replaceRange(leftOperandStartIndex, rightOperandEndIndex + 1, calculatedValue.stripTrailingZeros().toPlainString())
 
         return reduceMultiplicationAndDivision(newExpression)
     }
@@ -168,7 +163,7 @@ class Calculator {
     private fun reduceAdditionAndSubtraction(expression: String): String {
         val expr = expression.replace("\\s+".toRegex(), "")
         val regex = Regex("[+-]?(?:\\d+(?:\\.\\d+)?|\\.\\d+)")
-        val sum = regex.findAll(expr).sumOf { it.value.toDouble() }
+        val sum = regex.findAll(expr).sumOf { it.value.toBigDecimal() }
         return sum.toString()
     }
 

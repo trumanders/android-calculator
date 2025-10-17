@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             .updateInstantResultView(expressionTextView.text.toString(), instantResultTextView.text.toString())
 
         if (!instantResult.isEmpty() && instantResult.toDouble() % 1.0 == 0.0) {
-            instantResult = instantResult.toDouble().toInt().toString()
+            instantResult = instantResult.toBigDecimal().stripTrailingZeros().toPlainString()
         }
 
         instantResultTextView.text = instantResult.replace('.', Operators.POINT)
