@@ -103,11 +103,12 @@ class Calculator {
 
     private fun reducePercentOperator(expression: String): String {
         val regex = Regex("""(-?(?:\d+(?:\.\d+)?|\.\d+))%""")
-        return regex.replace(expression) { m ->
+        val result = regex.replace(expression) { m ->
             val numText = m.groupValues[1]
-            val replaced = (numText.toBigDecimal() / BigDecimal(100)).toString()
+            val replaced = (numText.toBigDecimal().divide(BigDecimal(100))).toString()
             replaced
         }
+        return result
     }
 
     private fun reduceMultiplicationAndDivision(expression: String): String {
