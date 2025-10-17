@@ -18,37 +18,21 @@ class Calculator {
         }
 
         var internalExpression = currentExpression.replace(Symbols.POINT, INTERNAL_CALCULATION_POINT)
-
-        // Remove trailing operators and point in internal calculation string
-        while (internalExpression.isNotEmpty()) {
-            val lastChar = internalExpression.last()
-            if (lastChar == INTERNAL_CALCULATION_POINT || ExpressionController.isOperator(lastChar)) {
-                internalExpression = internalExpression.dropLast(1)
-            } else {
-                break
-            }
-        }
-
-        if (!internalExpression.isEmpty() && internalExpression.last() == Symbols.START_PARENTHESES) {
-            internalExpression = internalExpression.dropLast(1)
-            internalStartPercentCount--
-        }
-
+        internalExpression = removeTrailingCharacters(internalExpression)
         internalExpression = completeWithClosingParentheses(internalExpression)
-
-        var internalExpressionWithoutParentheses = reduceParentheses(internalExpression)
+        internalExpression = reduceParentheses(internalExpression)
 
         if (
-            !internalExpressionWithoutParentheses.contains(Symbols.PERCENT) &&
-            (internalExpressionWithoutParentheses.all { it.isDigit() } ||
-            internalExpressionWithoutParentheses.none { it.isDigit() } ||
-            internalExpressionWithoutParentheses.all { ExpressionController.isOperator(it) } ||
-            internalExpressionWithoutParentheses.none { ExpressionController.isOperator(it) } )
+            !internalExpression.contains(Symbols.PERCENT) &&
+            (internalExpression.all { it.isDigit() } ||
+                    internalExpression.none { it.isDigit() } ||
+                    internalExpression.all { ExpressionController.isOperator(it) } ||
+                    internalExpression.none { ExpressionController.isOperator(it) } )
             ) {
             return ""
         }
 
-        var calculatedResult = calculate(internalExpressionWithoutParentheses)
+        var calculatedResult = calculate(internalExpression)
 
         return calculatedResult
     }
@@ -179,5 +163,19 @@ class Calculator {
         return sum.toString()
     }
 
-
+    private fun removeTrailingCharacters(inputExpr: String): String {
+        var newExpr = inputExpr
+        while (newExpr.isNotEmpty()) {
+            val lastChar = newExpr.last()
+            if (lastChar == INTERNAL_CALCULATION_POINT || ExpressionController.isOperator(lastChar)) {
+                newExpr = newExpr.dropLast(1)
+            }
+            else if (lastChar == Symbols.START_PARENTHESES) {
+                newExpr = newExpr.dropLast(1)
+                internalStartPercentCount--
+            }
+            else break
+        }
+        return newExpr
+    }
 }
