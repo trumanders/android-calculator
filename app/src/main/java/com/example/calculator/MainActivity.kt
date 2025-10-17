@@ -13,7 +13,7 @@ import java.text.DecimalFormatSymbols
 
 
 
-private lateinit var expressionFormatter: ExpressionFormatter
+private lateinit var expressionFormatter: ExpressionController
 private lateinit var calculator: Calculator
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        expressionFormatter = ExpressionFormatter()
+        expressionFormatter = ExpressionController()
         calculator = Calculator()
         setup()
     }
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             instantResult = instantResult.toBigDecimal().stripTrailingZeros().toPlainString()
         }
 
-        instantResultTextView.text = instantResult.replace('.', Operators.POINT)
+        instantResultTextView.text = instantResult.replace('.', Symbols.POINT)
 
         if (tappedButton.id == R.id.numSum) {
             expressionTextView.text = instantResultTextView.text
@@ -89,15 +89,15 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.num7).text = "7"
         findViewById<Button>(R.id.num8).text = "8"
         findViewById<Button>(R.id.num9).text = "9"
-        findViewById<Button>(R.id.numAdd).text = Operators.ADD.toString()
-        findViewById<Button>(R.id.numSubtract).text = Operators.SUBTRACT.toString()
-        findViewById<Button>(R.id.numMultiply).text = Operators.MULTIPLY.toString()
-        findViewById<Button>(R.id.numDivide).text = Operators.DIVIDE.toString()
+        findViewById<Button>(R.id.numAdd).text = Symbols.ADD.toString()
+        findViewById<Button>(R.id.numSubtract).text = Symbols.SUBTRACT.toString()
+        findViewById<Button>(R.id.numMultiply).text = Symbols.MULTIPLY.toString()
+        findViewById<Button>(R.id.numDivide).text = Symbols.DIVIDE.toString()
         findViewById<Button>(R.id.numBackspace).text = "⌫"
         findViewById<Button>(R.id.numAllClear).text = "AC"
         findViewById<Button>(R.id.numParentheses).text = "()"
-        findViewById<Button>(R.id.numPoint).text = Operators.POINT.toString()
+        findViewById<Button>(R.id.numPoint).text = Symbols.POINT.toString()
         findViewById<Button>(R.id.numSum).text = "="
-        findViewById<Button>(R.id.numPercent).text = Operators.PERCENT.toString()
+        findViewById<Button>(R.id.numPercent).text = Symbols.PERCENT.toString()
     }
 }

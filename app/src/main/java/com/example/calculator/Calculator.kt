@@ -11,25 +11,25 @@ private var internalEndPercentCount = 0
 
 class Calculator {
     fun updateInstantResultView(currentExpression: String, currentInstantResult: String): String {
-        internalStartPercentCount = ExpressionFormatter.startParenthesisCount
-        internalEndPercentCount = ExpressionFormatter.endParenthesisCount
+        internalStartPercentCount = ExpressionController.startParenthesisCount
+        internalEndPercentCount = ExpressionController.endParenthesisCount
         if (currentExpression.isEmpty()) {
             return ""
         }
 
-        var internalExpression = currentExpression.replace(Operators.POINT, INTERNAL_CALCULATION_POINT)
+        var internalExpression = currentExpression.replace(Symbols.POINT, INTERNAL_CALCULATION_POINT)
 
         // Remove trailing operators and point in internal calculation string
         while (internalExpression.isNotEmpty()) {
             val lastChar = internalExpression.last()
-            if (lastChar == INTERNAL_CALCULATION_POINT || ExpressionFormatter.isOperator(lastChar)) {
+            if (lastChar == INTERNAL_CALCULATION_POINT || ExpressionController.isOperator(lastChar)) {
                 internalExpression = internalExpression.dropLast(1)
             } else {
                 break
             }
         }
 
-        if (!internalExpression.isEmpty() && internalExpression.last() == Operators.START_PARENTHESES) {
+        if (!internalExpression.isEmpty() && internalExpression.last() == Symbols.START_PARENTHESES) {
             internalExpression = internalExpression.dropLast(1)
             internalStartPercentCount--
         }
@@ -39,11 +39,11 @@ class Calculator {
         var internalExpressionWithoutParentheses = reduceParentheses(internalExpression)
 
         if (
-            !internalExpressionWithoutParentheses.contains(Operators.PERCENT) &&
+            !internalExpressionWithoutParentheses.contains(Symbols.PERCENT) &&
             (internalExpressionWithoutParentheses.all { it.isDigit() } ||
             internalExpressionWithoutParentheses.none { it.isDigit() } ||
-            internalExpressionWithoutParentheses.all { ExpressionFormatter.isOperator(it) } ||
-            internalExpressionWithoutParentheses.none { ExpressionFormatter.isOperator(it) } )
+            internalExpressionWithoutParentheses.all { ExpressionController.isOperator(it) } ||
+            internalExpressionWithoutParentheses.none { ExpressionController.isOperator(it) } )
             ) {
             return ""
         }
@@ -56,7 +56,7 @@ class Calculator {
     private fun completeWithClosingParentheses(expr: String): String {
         val numberOfEndParenthesisToAdd = internalStartPercentCount - internalEndPercentCount
          return if (numberOfEndParenthesisToAdd > 0)
-            expr + Operators.END_PARENTHESES.toString().repeat(numberOfEndParenthesisToAdd)
+            expr + Symbols.END_PARENTHESES.toString().repeat(numberOfEndParenthesisToAdd)
         else expr
     }
 
@@ -89,12 +89,12 @@ class Calculator {
         var explicitMultiplyBeforeParentheses = ""
         var explicitMultiplyAFterParentheses = ""
 
-        if (start > 0 && (formattedExpression[start - 1] == Operators.PERCENT || formattedExpression[start - 1].isDigit())) {
-            explicitMultiplyBeforeParentheses = Operators.MULTIPLY.toString()
+        if (start > 0 && (formattedExpression[start - 1] == Symbols.PERCENT || formattedExpression[start - 1].isDigit())) {
+            explicitMultiplyBeforeParentheses = Symbols.MULTIPLY.toString()
         }
 
         if (end <= formattedExpression.length - 2 && formattedExpression[end + 1].isDigit()) {
-            explicitMultiplyAFterParentheses = Operators.MULTIPLY.toString()
+            explicitMultiplyAFterParentheses = Symbols.MULTIPLY.toString()
         }
 
         formattedExpression = formattedExpression.replaceRange(start, end + 1, explicitMultiplyBeforeParentheses + calculatedParentheses + explicitMultiplyAFterParentheses)
@@ -111,7 +111,7 @@ class Calculator {
     }
 
     private fun reduceMultiplicationAndDivision(expression: String): String {
-        val operatorIndex = expression.indexOfAny(charArrayOf(Operators.MULTIPLY, Operators.DIVIDE))
+        val operatorIndex = expression.indexOfAny(charArrayOf(Symbols.MULTIPLY, Symbols.DIVIDE))
 
         if (operatorIndex == -1)
             return expression
@@ -126,15 +126,15 @@ class Calculator {
             return expression.dropLast(1)
         }
 
-        val isDoubleOperator = expression[operatorIndex + 1] == Operators.SUBTRACT
+        val isDoubleOperator = expression[operatorIndex + 1] == Symbols.SUBTRACT
 
-        val rightOperandEndIndexOffset = expression
+        var rightOperandEndIndexOffset = expression
             .substring(if (isDoubleOperator) rightOperandStartIndex + 1 else rightOperandStartIndex)
             .indexOfFirst { !it.isDigit() && it != INTERNAL_CALCULATION_POINT }
 
         rightOperandEndIndex = if (rightOperandEndIndexOffset == -1)
             expression.length - 1
-        else operatorIndex + rightOperandEndIndexOffset
+        else if (isDoubleOperator) operatorIndex + rightOperandEndIndexOffset + 1 else operatorIndex + rightOperandEndIndexOffset
 
         // extract left operand
         val indexBeforeLeftOperandStart = expression
@@ -149,8 +149,8 @@ class Calculator {
         val leftOperand = expression.substring(leftOperandStartIndex, leftOperandEndIndex + 1).toBigDecimal()
         val rightOperand = expression.substring(rightOperandStartIndex, rightOperandEndIndex + 1).toBigDecimal()
         val calculatedValue: BigDecimal = when (expression[operatorIndex]) {
-            Operators.MULTIPLY -> leftOperand.multiply(rightOperand)
-            Operators.DIVIDE -> leftOperand.divide(rightOperand, 10, RoundingMode.HALF_UP)
+            Symbols.MULTIPLY -> leftOperand.multiply(rightOperand)
+            Symbols.DIVIDE -> leftOperand.divide(rightOperand, 10, RoundingMode.HALF_UP)
             else -> BigDecimal.ZERO
         }
 
