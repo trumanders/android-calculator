@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="colorClear">#37fa9198</color>
+    <color name="colorDelete">#37faa491</color>
+    <color name="colorDigit">#3787de9e</color>
+    <color name="colorOperator">#3787d2de</color>
+    <color name="colorParentheses">#3787ded4</color>
+    <color name="colorSum">#376693ba</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">Calculator</string>
+    <style name="Base.Theme.Calculator" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/colorDigit</item>
+        <item name="colorPrimaryDark">@color/colorOperator</item>
+    </style>
+    <style name="Theme.Calculator" parent="Base.Theme.Calculator"/>
+</resources>

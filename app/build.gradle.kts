@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.calculator"
+    namespace = "com.jazasoftware.instantcalculator"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.calculator"
+        applicationId = "com.jazasoftware.instantcalculator"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

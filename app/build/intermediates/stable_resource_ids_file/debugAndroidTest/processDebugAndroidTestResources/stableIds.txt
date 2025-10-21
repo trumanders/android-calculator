@@ -1,0 +1,2 @@
+com.jazasoftware.instantcalculator.test:style/WhiteBackgroundTheme = 0x7f010001
+com.jazasoftware.instantcalculator.test:style/WhiteBackgroundDialogTheme = 0x7f010000

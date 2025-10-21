@@ -1,57 +1,16 @@
-# Gradle
-.gradle/
-build/
-!gradle-wrapper.jar
-!gradle-wrapper.properties
+Jag är en systemutvecklare med fokus på robusta och tydligt strukturerade lösningar. Min styrka ligger i att skapa fungerande helheter mellan olika system, databaser och integrationer. Jag har arbetat med .NET och C# i flera år och har byggt upp en bred förståelse för hela kedjan från databas till API och vidare till klientlager. Jag trivs i miljöer där krav, teknik och struktur möts och där det finns ett behov av att tänka i flera lager samtidigt.
+Jag gillar att arbeta metodiskt med moderna utvecklingsmiljöer, och har mest erfarenhet inom Microsofts ekosystem. Jag använder Visual Studio, Git, GitHub och Azure DevOps för versionshantering, byggprocesser och driftsättning. Min erfarenhet omfattar både utveckling och driftaspekter, vilket ger mig ett praktiskt helhetsperspektiv på hur system ska konstrueras för att vara stabila, underhållbara och spårbara över tid.
+Jag arbetar med C#, .NET 9, Entity Framework och SQL Server, ofta i projekt där REST-API:er används som integrationsyta mellan system. Jag har byggt applikationer som kräver tydliga dataflöden och korrekt logik i affärslagret. Arkitekturfrågor är en central del av mitt arbetssätt; jag delar gärna upp system i lager för att hålla logik, datalagring och presentation separerade. Det ger kod som är mer förutsägbar och enklare att vidareutveckla.
+När det gäller integrationer har jag arbetat med att knyta samman system via API:er, både interna och externa, samt hanterat datakonvertering och validering. Detektivmomentet i att analysera ett system och hitta rätt angreppssätt tillhör det jag gör mest metodiskt. Jag testar, dokumenterar och strukturerar felspår och slutsatser på ett sätt som går att återanvända.
+Jag har även erfarenhet av CI/CD-flöden i Azure DevOps, och använt både klassiska pipelines och yaml, och har byggt upp kedjor för restore, build, test, artifact och deploy, till exempel. Jag är bekväm med att hantera miljöer i både utvecklings- och produktionsdrift och ser infrastruktur som en del av den tekniska helheten. Jag har arbetat med migreringar och hantering av databaser via Entity Framework, både i lokala miljöer och mot Azure SQL.
+När det gäller utvecklingsmetodik föredrar jag ett strukturerat, iterativt arbetssätt. Jag har provat på att arbeta agilt och enligt SCRUM. Jag uppskattar tydlig kommunikation kring vad som ska göras, och när det är färdigt, vad som blockerar, och vad som behöver förändras. Jag är van vid att bryta ner problem i hanterbara delar, bygga och verifiera stegvis, och hålla både funktion och stabilitet i fokus.
+Jag har även arbetat med dokumentation som beskriver systemens flöden, datamodeller och beroenden. 
+Mina erfarenheter sträcker sig också till frontendutveckling, främst i React och klassisk webbutveckling med HTML, CSS och JavaScript. Jag har använt frontend som presentationslager ovanpå mina egna API:er, vilket gett mig en förståelse för hur data bäst modelleras och levereras till klienten. Det har också gett mig insikt i användbarhet och behovet av tydlig struktur även på gränssnittsnivå.
+Jag lägger stor vikt vid versionshantering, kodstruktur och testbarhet. När jag implementerar nya funktioner försöker jag alltid säkerställa att logik och datahantering går att verifiera i isolering. Jag anser att tillförlitlighet är det viktigaste måttet på en utvecklares arbete – att systemet gör exakt det som avses, på samma sätt varje gång.
+Jag har även erfarenhet av att skapa simuleringar och testdata för att säkerställa att integrationer fungerar innan produktionsdrift. Det inkluderar generering av realistiska scenarier, uppföljning via loggar och verifiering mot databas. Denna vana att testa fullt flöde före driftsättning har visat sig effektiv i att undvika fel längre fram i kedjan.
+Jag arbetar gärna tillsammans med andra, men är samtidigt självgående och kan hantera hela utvecklingskedjan själv när det krävs. Jag ser samarbete som ett sätt att öka kvaliteten genom fler perspektiv, men håller samtidigt fast vid vikten av tydligt ansvar per del. Jag har lätt att samarbeta med både tekniska och icke-tekniska kollegor, då jag anser att ett gemensamt språk kring krav och lösning är grunden för fungerande system.
+Jag har en teknisk grundsyn som utgår från att allt ska gå att förstå, dokumentera och reproducera. Jag tycker om att analysera befintliga system, kartlägga logik, identifiera svaga punkter och föreslå förbättringar. Det gäller både prestanda, struktur och säkerhet. Jag ser utveckling som ett hantverk där precision och konsekvens väger tyngre än tempo.
+Jag är van vid att hålla mig uppdaterad kring nya teknologier och utvecklingsmetoder. Jag ser AI-stöd, containerplattformar och API-styrda integrationer som naturliga delar av framtida kommunal IT-miljö. Jag har erfarenhet av att kombinera klassisk backend-utveckling med moderna molnverktyg, och jag arbetar gärna med att ta fram lösningar som är hållbara över tid.
+Jag har goda kunskaper i både svenska och engelska, muntligt och skriftligt. Jag skriver alltis teknisk dokumentation, commit-meddelanden och användarinstruktioner engelska. Jag anpassar kommunikationen efter mottagare – detaljerat och tekniskt för utvecklare, sammanfattande för verksamhetsrepresentanter.
+Sammanfattningsvis ser jag mig som en systemutvecklare som strävar efter tydlighet, struktur och hållbar och kvalitativ kod.
 
-# Local configuration
-local.properties
-
-# IDE files
-*.iml
-/.idea/
-.idea/caches/
-.idea/libraries/
-.idea/modules.xml
-.idea/workspace.xml
-.idea/navEditor.xml
-.idea/assetWizardSettings.xml
-
-# OS files
-.DS_Store
-
-# Android build outputs
-/captures/
-/build/
-
-# External native build
-.externalNativeBuild/
-.cxx/
-
-# Keystore files
-*.jks
-*.keystore
-
-# Logs
-*.log
-
-# ART/Dalvik
-*.dex
-
-# Java class files
-*.class
-
-# Proguard
-/proguard/
-
-# Lint
-lint-results.xml
-lint-results.html
-
-# Crashlytics
-crashlytics-build.properties
-
-# APK/AAB
-*.apk
-*.ap_
-*.aab

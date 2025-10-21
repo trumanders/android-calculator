@@ -1,0 +1,4 @@
+#Tue Oct 21 13:56:28 CEST 2025
+base.0=D\:\\Programmering\\SKOLA\\Gavle-Android\\Calculator\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

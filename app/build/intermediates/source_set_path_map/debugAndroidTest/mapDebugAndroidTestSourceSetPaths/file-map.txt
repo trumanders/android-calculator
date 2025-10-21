@@ -1,0 +1,6 @@
+com.jazasoftware.instantcalculator.test.app-core-1.7.0-0 C:\Users\Anders\.gradle\caches\8.14.3\transforms\f2785d139ce4d3fdc86ce98d80e7aa67\transformed\core-1.7.0\res
+com.jazasoftware.instantcalculator.test.app-androidTest-1 D:\Programmering\SKOLA\Gavle-Android\Calculator\app\build\generated\res\resValues\androidTest\debug
+com.jazasoftware.instantcalculator.test.app-updated_navigation_xml-2 D:\Programmering\SKOLA\Gavle-Android\Calculator\app\build\generated\updated_navigation_xml\debugAndroidTest
+com.jazasoftware.instantcalculator.test.app-mergeDebugAndroidTestResources-3 D:\Programmering\SKOLA\Gavle-Android\Calculator\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.jazasoftware.instantcalculator.test.app-mergeDebugAndroidTestResources-4 D:\Programmering\SKOLA\Gavle-Android\Calculator\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.jazasoftware.instantcalculator.test.app-debugAndroidTest-5 D:\Programmering\SKOLA\Gavle-Android\Calculator\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
