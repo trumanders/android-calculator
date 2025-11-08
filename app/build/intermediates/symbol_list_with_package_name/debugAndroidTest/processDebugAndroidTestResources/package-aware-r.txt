@@ -1,3 +1,0 @@
-com.jazasoftware.instantcalculator.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

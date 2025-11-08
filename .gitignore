@@ -42,3 +42,6 @@ out/
 # Temporary files
 *.tmp
 *.temp
+app/build/
+*.dex
+
