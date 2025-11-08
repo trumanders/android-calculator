@@ -52,12 +52,10 @@ class ExpressionController() {
 
         return _updatedExpression
     }
-
     fun formatExpressionWithLocaleRules(expression: String): String {
         if (expression.isEmpty()) {
             return ""
         }
-
         val formattedExpression =
             Regex("\\d+(?:[.,]\\d+)?").replace(expression) { x ->
                 val raw = x.value
@@ -83,7 +81,8 @@ class ExpressionController() {
     private fun handleNegativeMultiplicationAndDivision() {
         if ((_buttonInput == Symbols.DIVIDE.toString() ||
                 _buttonInput == Symbols.MULTIPLY.toString() ||
-                _buttonInput == Symbols.ADD.toString())
+                _buttonInput == Symbols.ADD.toString() ||
+                _buttonInput == Symbols.PERCENT.toString())
             && (_updatedExpression.endsWith(Symbols.MULTIPLY.toString() + Symbols.SUBTRACT.toString()) ||
                     _updatedExpression.endsWith(Symbols.DIVIDE.toString() + Symbols.SUBTRACT.toString()))
         ) {
