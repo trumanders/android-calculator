@@ -97,14 +97,18 @@ class ExpressionController() {
     }
 
     private fun handleAdditionInput() {
-        if (_buttonInput == Symbols.ADD.toString() && _existingLastChar != null && _existingLastChar != Symbols.POINT) {
-            if (_existingLastChar!!.isDigit() || _existingLastChar == Symbols.PERCENT || _existingLastChar == Symbols.END_PARENTHESES)
-            {
-                addToExpression(_buttonInput)
-            }
-            if (isOperator(_existingLastChar!!)) {
-                replaceLastChar(_buttonInput)
-            }
+        if (_buttonInput != Symbols.ADD.toString()) return
+
+        if (_existingLastChar == null ||
+            _existingLastChar == Symbols.POINT ||
+            _existingLastChar == Symbols.SUBTRACT) return
+
+        if (_existingLastChar!!.isDigit() || _existingLastChar == Symbols.PERCENT || _existingLastChar == Symbols.END_PARENTHESES)
+        {
+            addToExpression(_buttonInput)
+        }
+        if (isOperator(_existingLastChar!!)) {
+            replaceLastChar(_buttonInput)
         }
     }
 
@@ -121,11 +125,13 @@ class ExpressionController() {
     }
 
     private fun handleMultiplicationAndDivisionInput() {
-        if ((_buttonInput != Symbols.MULTIPLY.toString() &&
-            _buttonInput != Symbols.DIVIDE.toString()) ||
-            _existingLastChar == Symbols.POINT ||
+        if (_buttonInput != Symbols.MULTIPLY.toString() && _buttonInput != Symbols.DIVIDE.toString()) return
+
+        if (_existingLastChar == Symbols.POINT ||
             _updatedExpression.isEmpty() ||
-            _existingLastChar == Symbols.START_PARENTHESES)
+            _existingLastChar == Symbols.START_PARENTHESES ||
+            _existingLastChar == Symbols.SUBTRACT
+            )
             return
 
         if (_existingLastChar != null && isOperator(_existingLastChar!!)) {
@@ -136,10 +142,11 @@ class ExpressionController() {
     }
 
     private fun handlePercentSignInput() {
-        if (_buttonInput != Symbols.PERCENT.toString() || _existingLastChar == Symbols.POINT)
-            return
+        if (_buttonInput != Symbols.PERCENT.toString()) return
 
-        val lastChar = _existingLastChar ?: return
+        if (_existingLastChar == null || _existingLastChar == Symbols.POINT || _existingLastChar == Symbols.SUBTRACT) return
+
+        val lastChar = _existingLastChar!! // null check above
 
         when {
             lastChar.isDigit() || lastChar == Symbols.END_PARENTHESES -> addToExpression(_buttonInput)
